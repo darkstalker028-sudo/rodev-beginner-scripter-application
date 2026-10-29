@@ -1,0 +1,7 @@
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local SPFeedBackPos = ReplicatedStorage:WaitForChild("SPFeedBackPos")
+local button = script.Parent
+
+SPFeedBackPos.OnClientEvent:Connect(function()
+	button.Text = "Sprint Upgrade - Purchased!"
+end)

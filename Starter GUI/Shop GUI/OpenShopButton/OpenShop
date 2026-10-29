@@ -1,0 +1,25 @@
+local button = script.Parent
+
+button.MouseButton1Click:Connect(function()
+	button.Visible = false
+	button.BackgroundTransparency = 1
+	button.TextTransparency = 1
+	local ShopFrame = button.Parent:WaitForChild("ShopFrame")
+	ShopFrame.Visible = true
+	ShopFrame.BackgroundTransparency = 0
+	local TitleLabel = ShopFrame:WaitForChild("TitleLabel")
+	TitleLabel.Visible = true
+	TitleLabel.TextTransparency = 0
+	local CloseButton = ShopFrame:WaitForChild("CloseShopButton")
+	CloseButton.Visible = true
+	CloseButton.BackgroundTransparency = 0
+	CloseButton.TextTransparency = 0
+	local DoubleCoins = ShopFrame:WaitForChild("DoubleCoinsButton")
+	DoubleCoins.Visible = true
+	DoubleCoins.BackgroundTransparency = 0
+	DoubleCoins.TextTransparency = 0
+	local SprintUpg = ShopFrame:WaitForChild("SprintButton")
+	SprintUpg.Visible = true
+	SprintUpg.BackgroundTransparency = 0
+	SprintUpg.TextTransparency = 0
+end)

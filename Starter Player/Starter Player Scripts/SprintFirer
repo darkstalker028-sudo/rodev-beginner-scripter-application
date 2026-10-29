@@ -1,0 +1,16 @@
+local UserInputService = game:GetService("UserInputService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local SprintEventStart = ReplicatedStorage:WaitForChild("SprintReqStart")
+local SprintEventStop = ReplicatedStorage:WaitForChild("SprintReqStop")
+
+UserInputService.InputBegan:Connect(function(input)
+	if input.KeyCode == Enum.KeyCode.LeftShift then
+		SprintEventStart:FireServer()
+	end
+end)
+
+UserInputService.InputEnded:Connect(function(input)
+	if input.KeyCode == Enum.KeyCode.LeftShift then
+		SprintEventStop:FireServer()
+	end
+end)

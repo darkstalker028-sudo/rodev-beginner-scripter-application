@@ -1,0 +1,48 @@
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local doubleCoins = ReplicatedStorage:WaitForChild("DBUpgradeReq")
+local sprintUpgrade = ReplicatedStorage:WaitForChild("SPUpgradeReq")
+local DBFeedBackPos = ReplicatedStorage:WaitForChild("DBFeedBackPos")
+local SPFeedBackPos = ReplicatedStorage:WaitForChild("SPFeedBackPos")
+local DBFeedBackNeg = ReplicatedStorage:WaitForChild("DBFeedBackNeg")
+local SPFeedBackNeg = ReplicatedStorage:WaitForChild("SPFeedBackNeg")
+local Players = game:GetService("Players")
+
+doubleCoins.OnServerEvent:Connect(function(player)
+	local leaderstats = player:FindFirstChild("leaderstats")
+	if leaderstats then
+		local ownership = leaderstats:FindFirstChild("2x Coins")
+		if ownership.Value == true then
+			print("Already owned.")
+			return end
+		local coins = leaderstats:FindFirstChild("Coins")
+		if coins and coins.Value >= 100 then
+			coins.Value = coins.Value - 100
+			ownership.Value = true
+			DBFeedBackPos:FireClient(player)
+			print("Purchase successful!")
+		else
+			DBFeedBackNeg:FireClient(player)
+			print("Insufficient coins.")
+		end
+	end
+end)
+
+sprintUpgrade.OnServerEvent:Connect(function(player)
+	local leaderstats = player:FindFirstChild("leaderstats")
+	if leaderstats then
+		local ownership = leaderstats:FindFirstChild("Sprint Upgrade")
+		if ownership.Value == true then
+			print("Upgrade already owned.")
+			return end
+		local coins = leaderstats:FindFirstChild("Coins")
+		if coins and coins.Value >= 250 then
+			coins.Value = coins.Value - 250
+			ownership.Value = true
+			SPFeedBackPos:FireClient(player)
+			print("Upgrade succesful.")
+		else
+			SPFeedBackNeg:FireClient(player)
+			print("Insufficient coins.")
+		end
+	end
+end)

@@ -1,0 +1,44 @@
+local crystal = script.Parent
+local Players = game:GetService("Players")
+local ServerStorage = game:GetService("ServerStorage")
+local collected = false
+local RemoteEvent = game.ReplicatedStorage:WaitForChild("CrystalCollected")
+
+crystal.Touched:Connect(function(hit)
+	if collected then return end
+	local character = hit.Parent
+	local player = Players:GetPlayerFromCharacter(character)
+	if player then
+		local leaderstats = player:FindFirstChild("leaderstats")
+		if leaderstats then
+			local coins = leaderstats:FindFirstChild("Coins")
+			if coins then
+				local doubleCoins = leaderstats:FindFirstChild("2x Coins")
+				local reward = 10
+				if doubleCoins and doubleCoins.Value == true then
+					reward = 20
+				end
+				coins.Value = coins.Value + reward
+				collected = true
+				crystal:Destroy()
+				RemoteEvent:FireClient(player, "CrystalCollected")
+				local folder = ServerStorage:FindFirstChild("CrystalTemplates")
+				if folder then
+					local template = folder:FindFirstChild("Crystal")
+					if template then
+						local spawnarea = workspace:WaitForChild("CrystalSpawnArea")
+						local randomX = math.random(spawnarea.Position.X - spawnarea.Size.X/2, spawnarea.Position.X + spawnarea.Size.X/2)
+						local randomZ = math.random(spawnarea.Position.Z - spawnarea.Size.Z/2, spawnarea.Position.Z + spawnarea.Size.Z/2)
+						local randomposition = Vector3.new(randomX, 5, randomZ)
+						task.delay(5, function()
+						local newCrystal = template:Clone()
+							newCrystal.Position = randomposition
+							newCrystal.Parent = workspace
+							newCrystal.Anchored = true
+						end)
+					end
+				end
+			end
+		end
+	end
+end)

@@ -1,0 +1,7 @@
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local PurchaseEvent = ReplicatedStorage:WaitForChild("SPUpgradeReq")
+local button = script.Parent
+
+button.MouseButton1Click:Connect(function()
+	PurchaseEvent:FireServer()
+end)

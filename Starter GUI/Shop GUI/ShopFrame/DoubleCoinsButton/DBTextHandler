@@ -1,0 +1,7 @@
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local DBFeedBackPos = ReplicatedStorage:WaitForChild("DBFeedBackPos")
+local button = script.Parent
+
+DBFeedBackPos.OnClientEvent:Connect(function()
+	button.Text = "DB Coins Upgrade - Purchased!"
+end)

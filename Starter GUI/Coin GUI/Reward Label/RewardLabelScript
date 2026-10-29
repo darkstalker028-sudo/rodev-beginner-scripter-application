@@ -1,0 +1,20 @@
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RemoteEvent = ReplicatedStorage:WaitForChild("CrystalCollected")
+local leaderstats = game.Players.LocalPlayer:WaitForChild("leaderstats")
+local doubleCoins = leaderstats:WaitForChild("2x Coins")
+local label = script.Parent
+
+RemoteEvent.OnClientEvent:Connect(function(action)
+	if action == "CrystalCollected" then
+		if doubleCoins.Value == true then
+			label.Text = "+20 Coins!"
+		else
+			label.Text = "+10 Coins!"
+		end
+
+		label.Visible = true
+		task.wait(2)
+		label.Visible = false
+		label.Text = ""
+	end
+end)

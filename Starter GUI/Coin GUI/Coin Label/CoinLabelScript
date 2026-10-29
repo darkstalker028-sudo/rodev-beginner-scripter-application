@@ -1,0 +1,11 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local leaderstats = player:WaitForChild("leaderstats")
+local coins = leaderstats:WaitForChild("Coins")
+local label = script.Parent
+
+label.Text = "Coins: " .. coins.Value
+
+coins.Changed:Connect(function(newValue)
+	label.Text = "Coins: " .. newValue
+end)

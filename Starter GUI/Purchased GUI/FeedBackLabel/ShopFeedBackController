@@ -1,0 +1,54 @@
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local DBFeedBackPos = ReplicatedStorage:WaitForChild("DBFeedBackPos")
+local SPFeedBackPos = ReplicatedStorage:WaitForChild("SPFeedBackPos")
+local DBFeedBackNeg = ReplicatedStorage:WaitForChild("DBFeedBackNeg")
+local SPFeedBackNeg = ReplicatedStorage:WaitForChild("SPFeedBackNeg")
+local label = script.Parent
+
+DBFeedBackPos.OnClientEvent:Connect(function()
+	label.Text = "Succesfully purchased 2x coins!"
+	label.Visible = true
+	label.TextTransparency = 0
+	label.BackgroundTransparency = 0
+	wait(2)
+	label.Visible = false
+	label.TextTransparency = 1
+	label.BackgroundTransparency = 1
+	label.Text = ""
+end)
+
+SPFeedBackPos.OnClientEvent:Connect(function()
+	label.Text = "Succesfully purchased sprint upgrade!"
+	label.Visible = true
+	label.TextTransparency = 0
+	label.BackgroundTransparency = 0
+	wait(2)
+	label.Visible = false
+	label.TextTransparency = 1
+	label.BackgroundTransparency = 1
+	label.Text = ""
+end)
+
+DBFeedBackNeg.OnClientEvent:Connect(function()
+	label.Text = "Not enough coins!"
+	label.Visible = true
+	label.TextTransparency = 0
+	label.BackgroundTransparency = 0
+	wait(2)
+	label.Visible = false
+	label.TextTransparency = 1
+	label.BackgroundTransparency = 1
+	label.Text = ""
+end)
+
+SPFeedBackNeg.OnClientEvent:Connect(function()
+	label.Text = "Not enough coins!"
+	label.Visible = true
+	label.TextTransparency = 0
+	label.BackgroundTransparency = 0
+	wait(2)
+	label.Visible = false
+	label.TextTransparency = 1
+	label.BackgroundTransparency = 1
+	label.Text = ""
+end)
